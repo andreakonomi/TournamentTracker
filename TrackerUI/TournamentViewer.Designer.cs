@@ -30,7 +30,7 @@ namespace TrackerUI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TournamentViewer));
-            this.lblHeader = new System.Windows.Forms.Label();
+            this.lblTournament = new System.Windows.Forms.Label();
             this.lblTournamentName = new System.Windows.Forms.Label();
             this.lblRound = new System.Windows.Forms.Label();
             this.cmbRound = new System.Windows.Forms.ComboBox();
@@ -46,16 +46,16 @@ namespace TrackerUI
             this.btnScore = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // lblHeader
+            // lblTournament
             // 
-            this.lblHeader.AutoSize = true;
-            this.lblHeader.Font = new System.Drawing.Font("Segoe UI Light", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblHeader.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.lblHeader.Location = new System.Drawing.Point(12, 9);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(224, 50);
-            this.lblHeader.TabIndex = 0;
-            this.lblHeader.Text = "Tournament :";
+            this.lblTournament.AutoSize = true;
+            this.lblTournament.Font = new System.Drawing.Font("Segoe UI Light", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTournament.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.lblTournament.Location = new System.Drawing.Point(12, 9);
+            this.lblTournament.Name = "lblTournament";
+            this.lblTournament.Size = new System.Drawing.Size(224, 50);
+            this.lblTournament.TabIndex = 0;
+            this.lblTournament.Text = "Tournament :";
             // 
             // lblTournamentName
             // 
@@ -126,7 +126,7 @@ namespace TrackerUI
             this.lblScoreTeamOne.AutoSize = true;
             this.lblScoreTeamOne.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblScoreTeamOne.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.lblScoreTeamOne.Location = new System.Drawing.Point(395, 243);
+            this.lblScoreTeamOne.Location = new System.Drawing.Point(395, 245);
             this.lblScoreTeamOne.Name = "lblScoreTeamOne";
             this.lblScoreTeamOne.Size = new System.Drawing.Size(82, 37);
             this.lblScoreTeamOne.TabIndex = 7;
@@ -213,7 +213,7 @@ namespace TrackerUI
             this.Controls.Add(this.cmbRound);
             this.Controls.Add(this.lblRound);
             this.Controls.Add(this.lblTournamentName);
-            this.Controls.Add(this.lblHeader);
+            this.Controls.Add(this.lblTournament);
             this.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TournamentViewer";
@@ -225,7 +225,7 @@ namespace TrackerUI
 
         #endregion
 
-        private System.Windows.Forms.Label lblHeader;
+        private System.Windows.Forms.Label lblTournament;
         private System.Windows.Forms.Label lblTournamentName;
         private System.Windows.Forms.Label lblRound;
         private System.Windows.Forms.ComboBox cmbRound;
