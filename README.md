@@ -1,5 +1,5 @@
 # TournamentTracker
 This is a desktop application for managing Tournaments.
 
-##Guidance
+## Guidance
 Provided by Tim Corey.
