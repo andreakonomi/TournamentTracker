@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TrackerLibrary;
+using TrackerLibrary.Models;
+using TrackerLibrary.DataAccess;
 
 namespace TrackerUI
 {
@@ -28,7 +29,7 @@ namespace TrackerUI
                     txtPrizeAmount.Text, 
                     txtPrizePercentage.Text);
 
-                foreach (IDataConnection db in GlobalConfig.Connections)
+                foreach (IDataConnection db in TrackerLibrary.GlobalConfig.Connections)
                 {
                     db.CreatePrize(model);      //here we get in return a prizeModel but for the moment we have no use for it
                 }
