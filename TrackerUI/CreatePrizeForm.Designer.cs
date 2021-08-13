@@ -107,6 +107,7 @@ namespace TrackerUI
             this.txtPrizeAmount.Name = "txtPrizeAmount";
             this.txtPrizeAmount.Size = new System.Drawing.Size(199, 35);
             this.txtPrizeAmount.TabIndex = 28;
+            this.txtPrizeAmount.Text = "0";
             // 
             // lblPrizePercentage
             // 
@@ -125,6 +126,7 @@ namespace TrackerUI
             this.txtPrizePercentage.Name = "txtPrizePercentage";
             this.txtPrizePercentage.Size = new System.Drawing.Size(199, 35);
             this.txtPrizePercentage.TabIndex = 30;
+            this.txtPrizePercentage.Text = "0";
             // 
             // lblOr
             // 
@@ -151,6 +153,7 @@ namespace TrackerUI
             this.btnCreatePrize.TabIndex = 32;
             this.btnCreatePrize.Text = "Create Prize";
             this.btnCreatePrize.UseVisualStyleBackColor = true;
+            this.btnCreatePrize.Click += new System.EventHandler(this.btnCreatePrize_Click);
             // 
             // CreatePrizeForm
             // 
