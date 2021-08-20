@@ -58,12 +58,18 @@ namespace TrackerLibrary.DataAccess
 
             return model; 
 
+            //Steps :
             // Load the text file to list<string>>
             //Convert to List<PrizeModel>
             //Find the max ID
             //Add the new record with the new ID
             //Convert the prizes to a list<string>
             //Save the list<string> to the text file
+        }
+
+        public List<PersonModel> GetPerson_All()
+        {
+            return PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
         }
     }
 }

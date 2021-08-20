@@ -14,9 +14,36 @@ namespace TrackerUI
 {
     public partial class CreateTeamForm : Form
     {
+        private List<PersonModel> availableTeamMembers = GlobalConfig.Connection.GetPerson_All();
+        private List<PersonModel> selectedTeamMembers = new();
+
         public CreateTeamForm()
         {
             InitializeComponent();
+
+            //CreateSampleData();
+            WireUpLists();
+        }
+
+        private void CreateSampleData()
+        {
+            availableTeamMembers.Add(new PersonModel { FirstName = "Tim", LastName = "Corey" });
+            availableTeamMembers.Add(new PersonModel { FirstName = "Andrea", LastName = "Konomi" });
+
+            selectedTeamMembers.Add(new PersonModel { FirstName = "Lebron", LastName = "James" });
+            selectedTeamMembers.Add(new PersonModel { FirstName = "Kevin", LastName = "Durant" });
+        }
+
+        //there are better ways to refresh the controls but for the moment its ok
+        private void WireUpLists()
+        {
+            cmbSelectTeamMember.DataSource = null;
+            cmbSelectTeamMember.DataSource = availableTeamMembers;
+            cmbSelectTeamMember.DisplayMember = "FullName";
+
+            ltbTeamMembers.DataSource = null;
+            ltbTeamMembers.DataSource = selectedTeamMembers;
+            ltbTeamMembers.DisplayMember = "FullName";
         }
 
         private void btnCreateMember_Click(object sender, EventArgs e)
@@ -30,7 +57,10 @@ namespace TrackerUI
                 p.EmailAddress = txtEmail.Text;
                 p.CellphoneNumber = txtCellphone.Text;
 
-                GlobalConfig.Connection.CreatePerson(p);
+                p = GlobalConfig.Connection.CreatePerson(p);
+
+                selectedTeamMembers.Add(p);
+                WireUpLists();
 
                 txtFirstName.Text = "";
                 txtLastName.Text = "";
@@ -66,6 +96,28 @@ namespace TrackerUI
             }
 
             return true;
+        }
+
+        private void btnAddMember_Click(object sender, EventArgs e)
+        {
+            if (cmbSelectTeamMember.SelectedIndex == -1) return;
+            PersonModel p = (PersonModel)cmbSelectTeamMember.SelectedItem;
+
+            availableTeamMembers.Remove(p);
+            selectedTeamMembers.Add(p);
+
+            WireUpLists();
+        }
+
+        private void btnRemoveTeamMember_Click(object sender, EventArgs e)
+        {
+            if (ltbTeamMembers.SelectedIndex == -1) return; //fixes bug of removing when no item is selected
+            PersonModel p = (PersonModel)ltbTeamMembers.SelectedItem;
+
+            selectedTeamMembers.Remove(p);
+            availableTeamMembers.Add(p);
+
+            WireUpLists();
         }
     }
 }
