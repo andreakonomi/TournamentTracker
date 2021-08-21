@@ -31,7 +31,7 @@ namespace TrackerUI
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateTeamForm));
             this.lblCreateTeam = new System.Windows.Forms.Label();
-            this.txtTeamN = new System.Windows.Forms.TextBox();
+            this.txtTeamName = new System.Windows.Forms.TextBox();
             this.lblTeamName = new System.Windows.Forms.Label();
             this.btnAddMember = new System.Windows.Forms.Button();
             this.cmbSelectTeamMember = new System.Windows.Forms.ComboBox();
@@ -63,12 +63,12 @@ namespace TrackerUI
             this.lblCreateTeam.TabIndex = 2;
             this.lblCreateTeam.Text = "Create Team";
             // 
-            // txtTeamN
+            // txtTeamName
             // 
-            this.txtTeamN.Location = new System.Drawing.Point(32, 113);
-            this.txtTeamN.Name = "txtTeamN";
-            this.txtTeamN.Size = new System.Drawing.Size(327, 35);
-            this.txtTeamN.TabIndex = 12;
+            this.txtTeamName.Location = new System.Drawing.Point(32, 113);
+            this.txtTeamName.Name = "txtTeamName";
+            this.txtTeamName.Size = new System.Drawing.Size(327, 35);
+            this.txtTeamName.TabIndex = 12;
             // 
             // lblTeamName
             // 
@@ -264,6 +264,7 @@ namespace TrackerUI
             this.btnCreateTeam.TabIndex = 25;
             this.btnCreateTeam.Text = "Create Team";
             this.btnCreateTeam.UseVisualStyleBackColor = true;
+            this.btnCreateTeam.Click += new System.EventHandler(this.btnCreateTeam_Click);
             // 
             // CreateTeamForm
             // 
@@ -278,7 +279,7 @@ namespace TrackerUI
             this.Controls.Add(this.btnAddMember);
             this.Controls.Add(this.cmbSelectTeamMember);
             this.Controls.Add(this.lblSelectTeamMember);
-            this.Controls.Add(this.txtTeamN);
+            this.Controls.Add(this.txtTeamName);
             this.Controls.Add(this.lblTeamName);
             this.Controls.Add(this.lblCreateTeam);
             this.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -295,7 +296,7 @@ namespace TrackerUI
         #endregion
 
         private System.Windows.Forms.Label lblCreateTeam;
-        private System.Windows.Forms.TextBox txtTeamN;
+        private System.Windows.Forms.TextBox txtTeamName;
         private System.Windows.Forms.Label lblTeamName;
         private System.Windows.Forms.Button btnAddMember;
         private System.Windows.Forms.ComboBox cmbSelectTeamMember;

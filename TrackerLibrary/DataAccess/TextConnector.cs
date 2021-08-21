@@ -12,6 +12,7 @@ namespace TrackerLibrary.DataAccess
     {
         private const string PrizesFile = "PrizeModels.csv";
         private const string PeopleFile = "PersonModels.csv";
+        private const string TeamFile = "TeamModels.csv";
 
         public PersonModel CreatePerson(PersonModel model)
         {
@@ -65,6 +66,27 @@ namespace TrackerLibrary.DataAccess
             //Add the new record with the new ID
             //Convert the prizes to a list<string>
             //Save the list<string> to the text file
+        }
+
+        public TeamModel CreateTeam(TeamModel model)
+        {
+            List<TeamModel> teams = TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);   //load teams from the file
+            //not add the next team and write them all. Wouldnt it be easier with append maybe?
+
+            int currentId = 1;
+
+            if (teams.Count > 0)
+            {
+                currentId = teams.OrderByDescending(x => x.Id).First().Id + 1;
+            }
+
+            model.Id = currentId;
+
+            teams.Add(model);           //add team to the whole list and then write them all again
+
+            teams.SaveToTeamFile(TeamFile);
+
+            return model;
         }
 
         public List<PersonModel> GetPerson_All()
