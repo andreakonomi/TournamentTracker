@@ -12,7 +12,7 @@ using TrackerLibrary.Models;
 
 namespace TrackerUI
 {
-    public partial class CreateTournamentForm : Form
+    public partial class CreateTournamentForm : Form, IPrizeRequester, ITeamRequestor
     {
         List<TeamModel> availableTeams = GlobalConfig.Connection.GetTeam_All();
         List<TeamModel> selectedTeams = new();
@@ -48,6 +48,56 @@ namespace TrackerUI
             availableTeams.Remove(p);
             selectedTeams.Add(p);
 
+            WireUpLists();
+        }
+
+        private void btnCreatePrize_Click(object sender, EventArgs e)
+        {
+            // Call the create prize form
+            CreatePrizeForm frm = new(this);
+            frm.Show();
+
+
+        }
+
+        public void PrizeComplete(PrizeModel model)
+        {
+            //Get back from the form a PrizeModel
+            //Take the PrizeModel and put into our list of selected prizes
+
+            selectedPrizes.Add(model);
+            WireUpLists();
+        }
+
+        public void TeamComplete(TeamModel model)
+        {
+            selectedTeams.Add(model);
+            WireUpLists();
+        }
+
+        private void llblCreateNewTeam_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CreateTeamForm frm = new(this);
+            frm.Show();
+        }
+
+        private void btnRemovePlayer_Click(object sender, EventArgs e)
+        {
+            if (ltbTournamentTeams.SelectedIndex == -1) return;
+            TeamModel t = (TeamModel)ltbTournamentTeams.SelectedItem;
+
+            selectedTeams.Remove(t);
+            availableTeams.Add(t);
+
+            WireUpLists();
+        }
+
+        private void btnRemovePrize_Click(object sender, EventArgs e)
+        {
+            if (ltbPrizes.SelectedIndex == -1) return;
+            PrizeModel p = (PrizeModel)ltbPrizes.SelectedItem;
+
+            selectedPrizes.Remove(p);
             WireUpLists();
         }
     }
