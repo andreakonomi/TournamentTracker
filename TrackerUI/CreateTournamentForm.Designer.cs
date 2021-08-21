@@ -40,7 +40,7 @@ namespace TrackerUI
             this.llblCreateNewTeam = new System.Windows.Forms.LinkLabel();
             this.btnAddTeam = new System.Windows.Forms.Button();
             this.btnCreatePrize = new System.Windows.Forms.Button();
-            this.ltbTournamentPlayers = new System.Windows.Forms.ListBox();
+            this.ltbTournamentTeams = new System.Windows.Forms.ListBox();
             this.lblTournamentPlayers = new System.Windows.Forms.Label();
             this.btnDeletePlayer = new System.Windows.Forms.Button();
             this.btnDeletePrize = new System.Windows.Forms.Button();
@@ -99,6 +99,7 @@ namespace TrackerUI
             // 
             // cmbSelectTeam
             // 
+            this.cmbSelectTeam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSelectTeam.FormattingEnabled = true;
             this.cmbSelectTeam.Location = new System.Drawing.Point(21, 260);
             this.cmbSelectTeam.Name = "cmbSelectTeam";
@@ -140,6 +141,7 @@ namespace TrackerUI
             this.btnAddTeam.TabIndex = 16;
             this.btnAddTeam.Text = "Add Team";
             this.btnAddTeam.UseVisualStyleBackColor = true;
+            this.btnAddTeam.Click += new System.EventHandler(this.btnAddTeam_Click);
             // 
             // btnCreatePrize
             // 
@@ -156,15 +158,15 @@ namespace TrackerUI
             this.btnCreatePrize.Text = "Create Prize";
             this.btnCreatePrize.UseVisualStyleBackColor = true;
             // 
-            // ltbTournamentPlayers
+            // ltbTournamentTeams
             // 
-            this.ltbTournamentPlayers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ltbTournamentPlayers.FormattingEnabled = true;
-            this.ltbTournamentPlayers.ItemHeight = 30;
-            this.ltbTournamentPlayers.Location = new System.Drawing.Point(436, 113);
-            this.ltbTournamentPlayers.Name = "ltbTournamentPlayers";
-            this.ltbTournamentPlayers.Size = new System.Drawing.Size(306, 182);
-            this.ltbTournamentPlayers.TabIndex = 18;
+            this.ltbTournamentTeams.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ltbTournamentTeams.FormattingEnabled = true;
+            this.ltbTournamentTeams.ItemHeight = 30;
+            this.ltbTournamentTeams.Location = new System.Drawing.Point(436, 113);
+            this.ltbTournamentTeams.Name = "ltbTournamentTeams";
+            this.ltbTournamentTeams.Size = new System.Drawing.Size(306, 182);
+            this.ltbTournamentTeams.TabIndex = 18;
             // 
             // lblTournamentPlayers
             // 
@@ -214,9 +216,9 @@ namespace TrackerUI
             this.lblPrizes.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.lblPrizes.Location = new System.Drawing.Point(436, 309);
             this.lblPrizes.Name = "lblPrizes";
-            this.lblPrizes.Size = new System.Drawing.Size(198, 37);
+            this.lblPrizes.Size = new System.Drawing.Size(85, 37);
             this.lblPrizes.TabIndex = 22;
-            this.lblPrizes.Text = "Teams / Players";
+            this.lblPrizes.Text = "Prizes";
             // 
             // ltbPrizes
             // 
@@ -255,7 +257,7 @@ namespace TrackerUI
             this.Controls.Add(this.ltbPrizes);
             this.Controls.Add(this.btnDeletePlayer);
             this.Controls.Add(this.lblTournamentPlayers);
-            this.Controls.Add(this.ltbTournamentPlayers);
+            this.Controls.Add(this.ltbTournamentTeams);
             this.Controls.Add(this.btnCreatePrize);
             this.Controls.Add(this.btnAddTeam);
             this.Controls.Add(this.llblCreateNewTeam);
@@ -286,7 +288,7 @@ namespace TrackerUI
         private System.Windows.Forms.LinkLabel llblCreateNewTeam;
         private System.Windows.Forms.Button btnAddTeam;
         private System.Windows.Forms.Button btnCreatePrize;
-        private System.Windows.Forms.ListBox ltbTournamentPlayers;
+        private System.Windows.Forms.ListBox ltbTournamentTeams;
         private System.Windows.Forms.Label lblTournamentPlayers;
         private System.Windows.Forms.Button btnDeletePlayer;
         private System.Windows.Forms.Button btnDeletePrize;
