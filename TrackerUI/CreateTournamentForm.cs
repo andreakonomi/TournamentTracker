@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrackerLibrary;
 using TrackerLibrary.Models;
@@ -99,6 +93,34 @@ namespace TrackerUI
 
             selectedPrizes.Remove(p);
             WireUpLists();
+        }
+
+        private void btnCreateTournament_Click(object sender, EventArgs e)
+        {
+            // Validate data
+            bool feeAcceptable = decimal.TryParse(txtEntryFee.Text, out decimal fee);
+
+            if (!feeAcceptable)
+            {
+                MessageBox.Show("You need to enter a valid Entry Fee.", "Invalid Fee", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Create our tournament model
+            TournamentModel tm = new();
+
+            tm.TournamentName = txtTournamentNameValue.Text;
+            tm.EntryFee = fee;
+
+            tm.Prizes = selectedPrizes;
+            tm.EnteredTeams = selectedTeams;
+
+            //TODO - Wire our matchups
+
+            // Create the tournament record
+            // Create all of the prizes entries
+            // Create all of team entries
+            GlobalConfig.Connection.CreateTournament(tm);
         }
     }
 }
