@@ -50,8 +50,6 @@ namespace TrackerUI
             // Call the create prize form
             CreatePrizeForm frm = new(this);
             frm.Show();
-
-
         }
 
         public void PrizeComplete(PrizeModel model)
@@ -115,7 +113,8 @@ namespace TrackerUI
             tm.Prizes = selectedPrizes;
             tm.EnteredTeams = selectedTeams;
 
-            //TODO - Wire our matchups
+            // Wire our matchups
+            TournamentLogic.CreateRounds(tm);   //have separated logic from the UI, so it is loosely coupled
 
             // Create the tournament record
             // Create all of the prizes entries
