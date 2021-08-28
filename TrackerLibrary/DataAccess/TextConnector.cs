@@ -112,7 +112,7 @@ namespace TrackerLibrary.DataAccess
 
             tournaments.Add(model);
 
-            tournaments.SaveToTournamentsFile(TournamentFile);
+            tournaments.SaveToTournamentsFile(TournamentFile.FullFilePath());
         }
 
         public List<PersonModel> GetPerson_All()
