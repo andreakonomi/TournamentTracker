@@ -31,7 +31,7 @@ namespace TrackerUI
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TournamentDashboardForm));
             this.lblTournamentDashboard = new System.Windows.Forms.Label();
-            this.cmbSelectTeamMember = new System.Windows.Forms.ComboBox();
+            this.cmbTournaments = new System.Windows.Forms.ComboBox();
             this.lblLoadExistingTournament = new System.Windows.Forms.Label();
             this.btnLoadTournament = new System.Windows.Forms.Button();
             this.btnCreateTournament = new System.Windows.Forms.Button();
@@ -48,13 +48,13 @@ namespace TrackerUI
             this.lblTournamentDashboard.TabIndex = 4;
             this.lblTournamentDashboard.Text = "Tournament Dashboard";
             // 
-            // cmbSelectTeamMember
+            // cmbTournaments
             // 
-            this.cmbSelectTeamMember.FormattingEnabled = true;
-            this.cmbSelectTeamMember.Location = new System.Drawing.Point(108, 132);
-            this.cmbSelectTeamMember.Name = "cmbSelectTeamMember";
-            this.cmbSelectTeamMember.Size = new System.Drawing.Size(327, 38);
-            this.cmbSelectTeamMember.TabIndex = 20;
+            this.cmbTournaments.FormattingEnabled = true;
+            this.cmbTournaments.Location = new System.Drawing.Point(108, 132);
+            this.cmbTournaments.Name = "cmbTournaments";
+            this.cmbTournaments.Size = new System.Drawing.Size(327, 38);
+            this.cmbTournaments.TabIndex = 20;
             // 
             // lblLoadExistingTournament
             // 
@@ -96,6 +96,7 @@ namespace TrackerUI
             this.btnCreateTournament.TabIndex = 22;
             this.btnCreateTournament.Text = "Create Tournament";
             this.btnCreateTournament.UseVisualStyleBackColor = true;
+            this.btnCreateTournament.Click += new System.EventHandler(this.btnCreateTournament_Click);
             // 
             // TournamentDashboardForm
             // 
@@ -105,7 +106,7 @@ namespace TrackerUI
             this.ClientSize = new System.Drawing.Size(541, 358);
             this.Controls.Add(this.btnCreateTournament);
             this.Controls.Add(this.btnLoadTournament);
-            this.Controls.Add(this.cmbSelectTeamMember);
+            this.Controls.Add(this.cmbTournaments);
             this.Controls.Add(this.lblLoadExistingTournament);
             this.Controls.Add(this.lblTournamentDashboard);
             this.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -120,7 +121,7 @@ namespace TrackerUI
         #endregion
 
         private System.Windows.Forms.Label lblTournamentDashboard;
-        private System.Windows.Forms.ComboBox cmbSelectTeamMember;
+        private System.Windows.Forms.ComboBox cmbTournaments;
         private System.Windows.Forms.Label lblLoadExistingTournament;
         private System.Windows.Forms.Button btnLoadTournament;
         private System.Windows.Forms.Button btnCreateTournament;

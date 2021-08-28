@@ -143,6 +143,7 @@ namespace TrackerLibrary.DataAccess.TextHelpers
                     string[] msText = round.Split('^');
                     List<MatchupModel> ms = new List<MatchupModel>();
 
+                    // TODO - Fix this bug, on launch of Tournamentdashboard
                     foreach (string matchupModelTextId in msText)
                     {
                         ms.Add(matchups.Where(x => x.Id == int.Parse(matchupModelTextId)).First());
