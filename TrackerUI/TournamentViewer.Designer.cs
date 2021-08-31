@@ -81,11 +81,13 @@ namespace TrackerUI
             // 
             // cmbRound
             // 
+            this.cmbRound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRound.FormattingEnabled = true;
             this.cmbRound.Location = new System.Drawing.Point(127, 73);
             this.cmbRound.Name = "cmbRound";
             this.cmbRound.Size = new System.Drawing.Size(197, 38);
             this.cmbRound.TabIndex = 3;
+            this.cmbRound.SelectedIndexChanged += new System.EventHandler(this.cmbRound_SelectedIndexChanged);
             // 
             // chkUnplayedOnly
             // 
@@ -109,6 +111,7 @@ namespace TrackerUI
             this.ltbMatchup.Name = "ltbMatchup";
             this.ltbMatchup.Size = new System.Drawing.Size(306, 242);
             this.ltbMatchup.TabIndex = 5;
+            this.ltbMatchup.SelectedIndexChanged += new System.EventHandler(this.ltbMatchup_SelectedIndexChanged);
             // 
             // lblTeamOneName
             // 

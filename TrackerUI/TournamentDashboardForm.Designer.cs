@@ -81,6 +81,7 @@ namespace TrackerUI
             this.btnLoadTournament.TabIndex = 21;
             this.btnLoadTournament.Text = "Load Tournament";
             this.btnLoadTournament.UseVisualStyleBackColor = true;
+            this.btnLoadTournament.Click += new System.EventHandler(this.btnLoadTournament_Click);
             // 
             // btnCreateTournament
             // 

@@ -33,6 +33,13 @@ namespace TrackerUI
             var frm = new CreateTournamentForm();
             frm.Show();
         }
+
+        private void btnLoadTournament_Click(object sender, EventArgs e)
+        {
+            TournamentModel tm = (TournamentModel)cmbTournaments.SelectedItem;
+            TournamentViewer frm = new(tm);
+            frm.Show();
+        }
     }
 
 
