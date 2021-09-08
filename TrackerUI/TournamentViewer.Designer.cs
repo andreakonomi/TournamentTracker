@@ -101,6 +101,7 @@ namespace TrackerUI
             this.chkUnplayedOnly.TabIndex = 4;
             this.chkUnplayedOnly.Text = "Unplayed Only";
             this.chkUnplayedOnly.UseVisualStyleBackColor = true;
+            this.chkUnplayedOnly.CheckedChanged += new System.EventHandler(this.chkUnplayedOnly_CheckedChanged);
             // 
             // ltbMatchup
             // 
@@ -196,6 +197,7 @@ namespace TrackerUI
             this.btnScore.TabIndex = 13;
             this.btnScore.Text = "Score";
             this.btnScore.UseVisualStyleBackColor = true;
+            this.btnScore.Click += new System.EventHandler(this.btnScore_Click);
             // 
             // TournamentViewer
             // 

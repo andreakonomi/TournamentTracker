@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrackerLibrary;
 using TrackerLibrary.Models;
 
 namespace TrackerUI
@@ -41,11 +42,6 @@ namespace TrackerUI
             ltbMatchup.DisplayMember = "DisplayName";
         }
 
-        private void WireUpMatchupsLists()
-        {
-
-        }
-
         private void LoadRounds()
         {
             rounds.Clear();
@@ -61,10 +57,10 @@ namespace TrackerUI
                     rounds.Add(currRound);
                     currRound++;
                 }
-            }
+            }   
         }
 
-        private void cmbRound_SelectedIndexChanged(object sender, EventArgs e)
+        private void RefreshControlsData()
         {
             LoadMatchups();
 
@@ -73,6 +69,11 @@ namespace TrackerUI
                 ltbMatchup.SelectedIndex = 0;
             }
             LoadMatchup();
+        }
+
+        private void cmbRound_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshControlsData();
         }
 
         private void LoadMatchups()
@@ -86,10 +87,29 @@ namespace TrackerUI
                     selectedMatchups.Clear();
                     foreach (MatchupModel m in matchups)
                     {
-                        selectedMatchups.Add(m);
+                        if (m.Winner == null || ! chkUnplayedOnly.Checked)
+                        {
+                            selectedMatchups.Add(m);
+                        }
                     }
                 }
             }
+
+            DisplayMatchupInfo();
+        }
+
+        private void DisplayMatchupInfo()   //left at 30:00
+        {
+            bool isVisible = selectedMatchups.Count > 0;
+
+            lblScoreTeamOne.Visible = isVisible;
+            lblTeamOneName.Visible = isVisible;
+            txtTeamOneScoreValue.Visible = isVisible;
+            lblTeamTwoName.Visible = isVisible;
+            lblTeamTwoScore.Visible = isVisible;
+            txtTeamTwoScore.Visible = isVisible;
+            btnScore.Visible = isVisible;
+            lblVs.Visible = isVisible;
         }
 
         private void LoadMatchup()
@@ -136,6 +156,98 @@ namespace TrackerUI
         private void ltbMatchup_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadMatchup();
+        }
+
+        private void chkUnplayedOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadMatchups();     //same as another event above, opportunity to refactor
+
+            if (selectedMatchups.Count > 0)
+            {
+                ltbMatchup.SelectedIndex = 0;
+            }
+            LoadMatchup();
+        }
+
+        private void btnScore_Click(object sender, EventArgs e)
+        {
+            double teamOneScore = 0;
+            double teamTwoScore = 0;
+            if (selectedMatchups.Count == 0) return;
+
+            MatchupModel m = (MatchupModel)ltbMatchup.SelectedItem;
+
+            for (int i = 0; i < m.Entries.Count; i++)
+            {
+                if (i == 0)
+                {
+                    if (m.Entries[0].TeamCompeting != null)
+                    {
+                        bool scoreValid = double.TryParse(txtTeamOneScoreValue.Text, out teamOneScore);
+                        if (scoreValid)
+                        {
+                            m.Entries[0].Score = teamOneScore;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please enter a valid score for Team One.");
+                            return;
+                        }
+                    }
+                }
+
+                if (i == 1)
+                {
+                    bool scoreValid = double.TryParse(txtTeamTwoScore.Text, out teamTwoScore);
+                    if (scoreValid)
+                    {
+                        m.Entries[1].Score = teamTwoScore;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter a valid score for Team Two.");
+                        return;
+                    }
+                }
+            }
+
+            if (teamOneScore > teamTwoScore)
+            {
+                // Team one wins
+                m.Winner = m.Entries[0].TeamCompeting;
+            }
+            else if (teamTwoScore > teamOneScore)
+            {
+                m.Winner = m.Entries[1].TeamCompeting;
+            }
+            else
+            {
+                MessageBox.Show("A draw can't be processed.");
+                return;
+            }
+
+            foreach (List<MatchupModel> round in tournament.Rounds)
+            {
+                foreach (MatchupModel rm in round)
+                {
+                    foreach (MatchupEntryModel me in rm.Entries)
+                    {
+                        if (me.ParentMatchup != null)
+                        {
+                            if (me.ParentMatchup.Id == m.Id)
+                            {
+                                me.TeamCompeting = m.Winner;
+                                GlobalConfig.Connection.UpdateMatchup(rm);
+                            } 
+                        }
+                    }
+                }
+            }
+
+            //TODO : Fix rounds > 1 creation for TextFile
+            RefreshControlsData();
+
+            GlobalConfig.Connection.UpdateMatchup(m);
         }
     }
 }
