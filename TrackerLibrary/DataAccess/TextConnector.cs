@@ -5,19 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using TrackerLibrary.Models;
 using TrackerLibrary.DataAccess.TextHelpers;
+using static TrackerLibrary.GlobalConfig;
 
 namespace TrackerLibrary.DataAccess
 {
     public class TextConnector : IDataConnection
     {
-        private const string PrizesFile = "PrizeModels.csv";
-        private const string PeopleFile = "PersonModels.csv";
-        private const string TeamFile = "TeamModels.csv";
-        private const string TournamentFile = "TournamentModels.csv";
-        private const string MatchupFile = "MatchupModels.csv";
-        private const string MatchupEntryFile = "MatchupEntryModels.csv";
-
-        public PersonModel CreatePerson(PersonModel model)
+        public void CreatePerson(PersonModel model)
         {
             List<PersonModel> people = PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
 
@@ -34,12 +28,10 @@ namespace TrackerLibrary.DataAccess
 
             //TODO solve the bug with id not being incremented
 
-            people.SaveToPeopleFile(PeopleFile);
-
-            return model;
+            people.SaveToPeopleFile();
         }
 
-        public PrizeModel CreatePrize(PrizeModel model)
+        public void CreatePrize(PrizeModel model)
         {
             //Load the text file and convert the text to List<PrizeModel>
             List<PrizeModel> prizes = PrizesFile.FullFilePath().LoadFile().ConvertToPrizeModels();
@@ -58,9 +50,7 @@ namespace TrackerLibrary.DataAccess
             //Ade new record with the new maxId + 1
             prizes.Add(model);
 
-            prizes.SaveToPrizeFile(PrizesFile);
-
-            return model; 
+            prizes.SaveToPrizeFile();
 
             //Steps :
             // Load the text file to list<string>>
@@ -71,9 +61,9 @@ namespace TrackerLibrary.DataAccess
             //Save the list<string> to the text file
         }
 
-        public TeamModel CreateTeam(TeamModel model)
+        public void CreateTeam(TeamModel model)
         {
-            List<TeamModel> teams = TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);   //load teams from the file
+            List<TeamModel> teams = TeamFile.FullFilePath().LoadFile().ConvertToTeamModels();   //load teams from the file
             //not add the next team and write them all. Wouldnt it be easier with append maybe?
 
             int currentId = 1;
@@ -87,9 +77,7 @@ namespace TrackerLibrary.DataAccess
 
             teams.Add(model);           //add team to the whole list and then write them all again
 
-            teams.SaveToTeamFile(TeamFile);
-
-            return model;
+            teams.SaveToTeamFile();
         }
 
         public void CreateTournament(TournamentModel model)
@@ -97,7 +85,7 @@ namespace TrackerLibrary.DataAccess
             List<TournamentModel> tournaments = TournamentFile
                 .FullFilePath()
                 .LoadFile()
-                .ConvertToTournamentModels(TeamFile,PeopleFile,PrizesFile);
+                .ConvertToTournamentModels();
 
             int currentId = 1;
 
@@ -108,11 +96,13 @@ namespace TrackerLibrary.DataAccess
 
             model.Id = currentId;
 
-            model.SaveRoundsToFile(MatchupFile, MatchupEntryFile);
+            model.SaveRoundsToFile();
 
             tournaments.Add(model);
 
-            tournaments.SaveToTournamentsFile(TournamentFile.FullFilePath());
+            tournaments.SaveToTournamentsFile();
+
+            TournamentLogic.UpdateTournamentResults(model);
         }
 
         public List<PersonModel> GetPerson_All()
@@ -122,17 +112,17 @@ namespace TrackerLibrary.DataAccess
 
         public List<TeamModel> GetTeam_All()
         {
-            return TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);
+            return TeamFile.FullFilePath().LoadFile().ConvertToTeamModels();
         }
 
         public List<TournamentModel> GetTournament_All()
         {
-            return TournamentFile.FullFilePath().LoadFile().ConvertToTournamentModels(TeamFile, PeopleFile, PrizesFile);
+            return TournamentFile.FullFilePath().LoadFile().ConvertToTournamentModels();
         }
 
         public void UpdateMatchup(MatchupModel model)
         {
-            model.UpdateMatchupToFile();        //left at 1:02:00
+            model.UpdateMatchupToFile();
         }
     }
 }

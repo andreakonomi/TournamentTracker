@@ -211,43 +211,11 @@ namespace TrackerUI
                 }
             }
 
-            if (teamOneScore > teamTwoScore)
-            {
-                // Team one wins
-                m.Winner = m.Entries[0].TeamCompeting;
-            }
-            else if (teamTwoScore > teamOneScore)
-            {
-                m.Winner = m.Entries[1].TeamCompeting;
-            }
-            else
-            {
-                MessageBox.Show("A draw can't be processed.");
-                return;
-            }
+            TournamentLogic.UpdateTournamentResults(tournament);
 
-            foreach (List<MatchupModel> round in tournament.Rounds)
-            {
-                foreach (MatchupModel rm in round)
-                {
-                    foreach (MatchupEntryModel me in rm.Entries)
-                    {
-                        if (me.ParentMatchup != null)
-                        {
-                            if (me.ParentMatchup.Id == m.Id)
-                            {
-                                me.TeamCompeting = m.Winner;
-                                GlobalConfig.Connection.UpdateMatchup(rm);
-                            } 
-                        }
-                    }
-                }
-            }
-
-            //TODO : Fix rounds > 1 creation for TextFile
             RefreshControlsData();
 
-            GlobalConfig.Connection.UpdateMatchup(m);
+        
         }
     }
 }
