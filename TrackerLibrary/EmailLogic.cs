@@ -9,12 +9,22 @@ namespace TrackerLibrary
 {
     public static class EmailLogic
     {
-        public static void SendEmail(string to, string subject, string body)
+        public static void SendEmail(List<string> to,List<string> bcc, string subject, string body)
         {
             MailAddress fromMailAddress = new(GlobalConfig.AppKeyLookUp("senderEmail"), GlobalConfig.AppKeyLookUp("senderDisplayName"));
 
             MailMessage mail = new();
-            mail.To.Add(to);
+            foreach (string email in to)
+            {
+                mail.To.Add(email);
+
+            }
+            foreach (string email in bcc)
+            {
+                mail.Bcc.Add(email);
+
+            }
+
             mail.From = fromMailAddress;
             mail.Subject = subject;
             mail.Body = body;
@@ -22,6 +32,14 @@ namespace TrackerLibrary
 
             SmtpClient client = new();
             client.Send(mail);
+        }
+
+        /// <summary>
+        /// Sends the email to just one person.
+        /// </summary>
+        public static void SendEmail(string to, string subject, string body)
+        {
+            SendEmail(new List<string> { to }, new List<string>(), subject, body);
         }
     }
 }

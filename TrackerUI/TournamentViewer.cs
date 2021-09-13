@@ -22,12 +22,20 @@ namespace TrackerUI
         {
             InitializeComponent();
             tournament = tournamentModel;
+
+            tournament.OnTournamentComplete += Tournament_OnTournamentComplete;
+
             LoadFormData();
             
             WireUpLists();
 
             LoadRounds();
             LoadMatchups();
+        }
+
+        private void Tournament_OnTournamentComplete(object sender, DateTime e)
+        {
+            Close();
         }
 
         private void LoadFormData()

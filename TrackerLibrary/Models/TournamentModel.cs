@@ -8,6 +8,9 @@ namespace TrackerLibrary.Models
 {
     public class TournamentModel
     {
+        //create/define the delegate to store the subscribers of the event
+        public event EventHandler<DateTime> OnTournamentComplete;
+
         /// <summary>
         /// Represents the identifier for the tournament.
         /// </summary>
@@ -36,5 +39,11 @@ namespace TrackerLibrary.Models
         /// Represents the total list of grouped matchups for every round accordingly. 
         /// </summary>
         public List<List<MatchupModel>> Rounds { get; set; } = new List<List<MatchupModel>>();
+
+        //Trigger the event
+        public void CompleteTournament()
+        {
+            OnTournamentComplete?.Invoke(this, DateTime.Now);
+        }
     }
 }
