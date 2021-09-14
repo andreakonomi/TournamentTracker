@@ -40,7 +40,7 @@ namespace TrackerLibrary
             {
                 foreach (MatchupModel rm in round)
                 {
-                    if (rm.Winner != null && (rm.Entries.Any(x => x.Score != 0) || rm.Entries.Count == 1))
+                    if (rm.Winner == null && (rm.Entries.Any(x => x.Score != 0) || rm.Entries.Count == 1))
                     {
                         toScore.Add(rm);
                     }
@@ -321,7 +321,19 @@ namespace TrackerLibrary
             {
                 foreach (MatchupModel match in previousRound)
                 {
-                    currMatchup.Entries.Add(new MatchupEntryModel { ParentMatchup = match });
+                    if (match.Entries.Count == 1)
+                    {
+                        MatchupEntryModel matchupEntry = new () { 
+                        ParentMatchup = match,
+                        TeamCompeting = match.Entries[0].TeamCompeting
+                        };
+
+                        currMatchup.Entries.Add(matchupEntry);
+                    }
+                    else
+                    {
+                        currMatchup.Entries.Add(new MatchupEntryModel { ParentMatchup = match });
+                    }
 
                     if (currMatchup.Entries.Count > 1)
                     {

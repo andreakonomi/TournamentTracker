@@ -31,7 +31,7 @@ namespace TrackerLibrary
             mail.IsBodyHtml = true;
 
             SmtpClient client = new();
-            client.Send(mail);
+            //client.Send(mail);
         }
 
         /// <summary>

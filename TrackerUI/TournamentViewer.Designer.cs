@@ -44,6 +44,7 @@ namespace TrackerUI
             this.lblTeamTwoName = new System.Windows.Forms.Label();
             this.lblVs = new System.Windows.Forms.Label();
             this.btnScore = new System.Windows.Forms.Button();
+            this.lblFinished = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblTournament
@@ -199,12 +200,25 @@ namespace TrackerUI
             this.btnScore.UseVisualStyleBackColor = true;
             this.btnScore.Click += new System.EventHandler(this.btnScore_Click);
             // 
+            // lblFinished
+            // 
+            this.lblFinished.AutoSize = true;
+            this.lblFinished.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblFinished.ForeColor = System.Drawing.Color.Goldenrod;
+            this.lblFinished.Location = new System.Drawing.Point(391, 132);
+            this.lblFinished.Name = "lblFinished";
+            this.lblFinished.Size = new System.Drawing.Size(235, 37);
+            this.lblFinished.TabIndex = 14;
+            this.lblFinished.Text = "Matchup Finished!";
+            this.lblFinished.Visible = false;
+            // 
             // TournamentViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(718, 470);
+            this.Controls.Add(this.lblFinished);
             this.Controls.Add(this.btnScore);
             this.Controls.Add(this.lblVs);
             this.Controls.Add(this.txtTeamTwoScore);
@@ -244,6 +258,7 @@ namespace TrackerUI
         private System.Windows.Forms.Label lblTeamTwoName;
         private System.Windows.Forms.Label lblVs;
         private System.Windows.Forms.Button btnScore;
+        private System.Windows.Forms.Label lblFinished;
     }
 }
 

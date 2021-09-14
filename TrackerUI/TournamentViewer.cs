@@ -126,6 +126,17 @@ namespace TrackerUI
 
             MatchupModel m = (MatchupModel)ltbMatchup.SelectedItem;
 
+            if (m.Entries.Count == 1 || m.Winner != null)   //set label indicating finished tournament
+            {
+                btnScore.Enabled = false;
+                lblFinished.Visible = true;
+            }
+            else
+            {
+                btnScore.Enabled = true;
+                lblFinished.Visible = false;
+            }
+
             for (int i = 0; i < m.Entries.Count; i++)
             {
                 if (i == 0)
@@ -155,7 +166,7 @@ namespace TrackerUI
                     else
                     {
                         lblTeamTwoName.Text = "Not Yet Set";
-                        txtTeamTwoScore.Text = "";
+                        txtTeamTwoScore.Text = "0";
                     }
                 }
             }
@@ -168,6 +179,7 @@ namespace TrackerUI
 
         private void chkUnplayedOnly_CheckedChanged(object sender, EventArgs e)
         {
+            lblFinished.Visible = false;
             LoadMatchups();     //same as another event above, opportunity to refactor
 
             if (selectedMatchups.Count > 0)
@@ -194,7 +206,7 @@ namespace TrackerUI
             {
                 output = "The Score Two value is not a valid number.";
             }
-            else if (teamOneScore == 0 || teamTwoScore == 0)
+            else if (teamOneScore == 0 && teamTwoScore == 0)
             {
                 output = "You did not enter a score for either team.";
             }
